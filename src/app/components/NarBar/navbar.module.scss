@@ -1,0 +1,28 @@
+.wrapper {
+    background: linear-gradient(
+      257.48deg,
+      var(--rgba-primary-1) .89%,
+      var(--rgba-primary-1-blur) 97.44%
+    );
+}
+
+.navbar-list  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    margin: 0 auto;
+    height: 60px;
+}
+
+.navbar-item__image {
+    position: relative;
+    width: 19px;
+    height: 20px;
+    top: 2px;
+}
+
+.navbar-item__link  {
+    color: white;
+
+}

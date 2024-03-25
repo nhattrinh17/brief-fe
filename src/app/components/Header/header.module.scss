@@ -1,7 +1,7 @@
 .header {
   padding: 15px 16px;
   margin: 0 auto;
-  justify-content: space-between;
+  align-items: center;
 }
 
 .header-left {
@@ -16,80 +16,33 @@
   object-fit: contain;
 }
 
-.header-search {
-  margin-left: auto;
-  height: 36px;
-  position: relative;
-}
-
-.header-search__input {
-  background-color: var(--background-input-1);
-  padding: 0 18px;
-  min-width: 400px;
-  color: var(--color-header);
-}
-
-.header-search__submit {
-  background: linear-gradient(
-    257.48deg,
-    var(--rgba-primary-1) 20%,
-    var(--rgba-primary-1-blur) 97.44%
-  );
-  display: flex;
-  align-items: center;
-  padding: 0 8px;
-  color: white;
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-}
-
-.header-search__icon {
-  width: 1.2rem;
-  margin-right: 4px;
-}
-
 .header-right {
   align-items: center;
 }
 
-.header-select__language {
+.header-cart {
   position: relative;
+  margin-left: 24px;
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
 }
 
-.header-select__language--result {
-  position: relative;
-  padding: 8px 32px 8px 20px;
-  border: 1px solid var(--rgba-primary-1-blur);
+.header-cart__icon {
+  font-size: 1.4rem;
+  color: var(--rgba-primary-1-blur);
 }
 
-.header-select__icon {
-  width: 1rem;
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  pointer-events: none; /* Loại bỏ sự kiện click */
-  right: 4px;
+.header-cart__number {
+  // position: absolute;
+  // top: transformY(-50%);
+  // right: -20px;
+  color: white;
+  padding: 2px 9px;
+  background-color: red;
+  margin-left: 12px;
 }
 
-.header-select__language--option {
-  position: absolute;
-  top: calc(100% + 12px);
-  right: 0;
-  left: 0;
-  border: 1px solid #ccc;
-  overflow: hidden;
-
-  & span {
-    display: block;
-    text-align: center;
-    padding: 8px 16px;
-    transition: all linear 0.2s;
-  }
-
-  & span:hover {
-    background-color: var(--background-input-1);
-  }
+.header-mobile__search {
+  margin-left: 28px;
 }

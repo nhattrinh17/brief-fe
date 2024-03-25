@@ -1,86 +1,74 @@
-"use client";
+'use client';
 
-import {
-  faChevronDown,
-  faMagnifyingGlass,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import classNames from "classnames/bind";
-import styles from "./header.module.scss";
-import { SelectUi } from "@/uiCore";
+import { faBagShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
+import classNames from 'classnames/bind';
+import styles from './header.module.scss';
+import { SelectUi } from '@/uiCore';
+import FeatherIcon from 'feather-icons-react';
+import SearchHeader from '../Search';
 
 const cx = classNames.bind(styles);
 
 export function Header(): JSX.Element {
-  const [language, setLanguage] = useState("VI");
-  const [money, setMoney] = useState("VND");
+  const [language, setLanguage] = useState('VI');
+  const [money, setMoney] = useState('VND');
+  const [openSearchMobile, setOpenSearchMobile] = useState(false);
 
   return (
-    <header className={cx("container flex", "header")}>
-      <div className={cx("header-left", "flex")}>
-        <Link href={"/"}>
-          <Image
-            alt="Logo Brief"
-            src={"/logo.webp"}
-            width={120}
-            height={60}
-            className={cx("header__logo")}
-          />
-        </Link>
-        <form className={cx("header-search", "flex")}>
-          <input
-            type="search"
-            placeholder="Bạn chọn chế độ dinh dưỡng nào?"
-            className={cx(
-              "header-search__input",
-              "outline-none rounded-2xl text-base"
-            )}
-          />
-          <button
-            className={cx(
-              "flex rounded-2xl text-sm font-medium",
-              "header-search__submit"
-            )}
-          >
-            <FontAwesomeIcon
-              icon={faMagnifyingGlass}
-              className={cx("header-search__icon")}
+    <header className={cx('container', 'header')}>
+      <div className={cx('container flex justify-between max-sm:justify-around')}>
+        <FeatherIcon icon="align-left" className={cx('max-sm:block hidden')} />
+        <div className={cx('header-left', 'flex max-sm:justify-center justify-between')}>
+          <Link href={'/'}>
+            <Image alt="Logo Brief" src={'/logo.webp'} width={120} height={60} className={cx('header__logo', 'max-sm:ml-12')} />
+          </Link>
+          <div className="max-sm:hidden">
+            <SearchHeader />
+          </div>
+        </div>
+        <div className={cx('flex', 'header-right')}>
+          <div className={cx('max-sm:hidden flex')}>
+            <SelectUi
+              data={[
+                { key: 'VI', value: language == 'VI' ? 'Việt Nam' : 'Vietnamese' },
+                { key: 'EN', value: language == 'VI' ? 'Tiếng Anh' : 'English' },
+              ]}
+              name="language"
+              onChange={(value) => setLanguage(value)}
+              valueDefault={language == 'VI' ? 'Việt Nam' : 'English'}
             />
-            Tìm kiếm
-          </button>
-        </form>
-      </div>
+            <SelectUi
+              data={[
+                {
+                  key: 'VND',
+                  value: language == 'VI' ? 'Việt Nam đồng' : 'VND',
+                },
+                { key: 'USD', value: language == 'VI' ? 'Đô la Mỹ' : 'Dollar' },
+              ]}
+              name="money"
+              onChange={(value) => setMoney(value)}
+              valueDefault={money == 'VND' ? 'VND' : 'USD'}
+            />
+          </div>
+          <div className={cx('header-cart')}>
+            <FontAwesomeIcon icon={faBagShopping} className={cx('header-cart__icon')} />
+            <span className={cx('header-cart__number', 'rounded-full text-sm max-sm:absolute max-sm:bottom-2')}>1</span>
+          </div>
 
-      <div className={cx("flex", "header-right")}>
-        <SelectUi
-          data={[
-            { key: "VI", value: language == "VI" ? "Việt Nam" : "Vietnamese" },
-            { key: "EN", value: language == "VI" ? "Tiếng Anh" : "English" },
-          ]}
-          name="language"
-          onChange={(value) => setLanguage(value)}
-          valueDefault={language == "VI" ? "Việt Nam" : "English"}
-        />
-
-        <SelectUi
-          data={[
-            {
-              key: "VND",
-              value: language == "VI" ? "Việt Nam đồng" : "VND",
-            },
-            { key: "USD", value: language == "VI" ? "Đô la Mỹ" : "Dollar" },
-          ]}
-          name="money"
-          onChange={(value) => setMoney(value)}
-          valueDefault={money == "VND" ? "VND" : "USD"}
-        />
+          <div className={cx('header-mobile__search', 'hidden max-sm:block')}>
+            <FontAwesomeIcon icon={faMagnifyingGlass} className={cx('header-cart__icon')} onClick={() => setOpenSearchMobile((pre) => !pre)} />
+          </div>
+        </div>
       </div>
+      {openSearchMobile && (
+        <div className={cx('header-search__mobile mt-4 hidden max-sm:block')}>
+          <SearchHeader />
+        </div>
+      )}
     </header>
   );
 }
-// {language == "VI" ? "Việt Nam" : "English"}
-// {language == "VI" ? "Việt Nam" : "English"}
-// {language == "VI" ? "Tiếng Anh" : "Vietnamese"}
