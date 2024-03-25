@@ -1,0 +1,40 @@
+.header-select__language {
+  position: relative;
+  margin-right: 20px;
+}
+
+.header-select__language--result {
+  position: relative;
+  padding: 8px 32px 8px 20px;
+  border: 1px solid var(--rgba-primary-1-blur);
+}
+
+.header-select__icon {
+  width: 1rem;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  pointer-events: none; /* Loại bỏ sự kiện click */
+  right: 4px;
+}
+
+.header-select__language--option {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  min-width: 150px;
+  border: 1px solid #ccc;
+  overflow: hidden;
+
+  & span {
+    display: block;
+    text-align: center;
+    padding: 8px 16px;
+    transition: all linear 0.2s;
+  }
+
+  & span:hover {
+    background-color: var(--background-input-1);
+  }
+}
