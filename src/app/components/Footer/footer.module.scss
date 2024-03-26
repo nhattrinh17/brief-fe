@@ -1,0 +1,33 @@
+.footer {
+  background: linear-gradient(257.48deg, var(--rgba-primary-1) 0.89%, var(--rgba-primary-1-blur) 97.44%);
+  margin-top: 43px;
+  padding: 20px 15px;
+  color: white;
+}
+
+.wrapper {
+  align-items: stretch;
+  padding-top: 20px;
+}
+
+.footer__logo-confirm {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
+.footer__image--logo {
+  height: 43px;
+  object-fit: contain;
+  max-width: 200px;
+}
+
+.footer__image--confirm {
+  height: 75px;
+  object-fit: contain;
+  max-width: 200px;
+}
+
+.footer-network {
+  text-align: -webkit-center;
+}

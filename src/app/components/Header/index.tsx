@@ -24,7 +24,7 @@ export function Header(): JSX.Element {
         <FeatherIcon icon="align-left" className={cx('max-sm:block hidden')} />
         <div className={cx('header-left', 'flex max-sm:justify-center justify-between')}>
           <Link href={'/'}>
-            <Image alt="Logo Brief" src={'/logo.webp'} width={120} height={60} className={cx('header__logo', 'max-sm:ml-12')} />
+            <Image alt="Logo" src={'/logo.webp'} width={120} height={60} className={cx('header__logo', 'max-sm:ml-12')} />
           </Link>
           <div className="max-sm:hidden">
             <SearchHeader />

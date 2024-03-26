@@ -32,4 +32,33 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  .underline-text__run::after {
+    display: none;
+    content: '';
+    position: absolute;
+    bottom: 1;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    animation: expandWidth 0.4s ease forwards;
+  }
+
+  .underline-text__run:hover::after {
+    display: block;
+  }
+
+  .margin-left-right {
+    margin: 0 auto;
+  }
+}
+
+@keyframes expandWidth {
+  0% {
+    width: 0; /* Bắt đầu với width là 0% */
+  }
+  100% {
+    width: 100%; /* Kết thúc với width là 100% */
+  }
 }
