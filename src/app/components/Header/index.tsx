@@ -19,7 +19,6 @@ export function Header(): JSX.Element {
   const [openSearchMobile, setOpenSearchMobile] = useState(false);
   const navbarElement = useRef<HTMLDivElement>(null);
   const [isNavMobileOpen, setIsNavMobileOpen] = useState(false);
-  console.log('🚀 ~ Header ~ isNavMobileOpen:', isNavMobileOpen);
 
   const toggleNavMobile = () => {
     setIsNavMobileOpen(!isNavMobileOpen);
