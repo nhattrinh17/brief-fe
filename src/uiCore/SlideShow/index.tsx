@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { widthScreenEnum } from '@/contains';
 
 interface Slider {
   firstVideo?: boolean;
@@ -47,13 +48,6 @@ function SliderVideo({ videos }: { videos: string[] }): JSX.Element {
               if (playBtn) {
                 playBtn.style.display = 'block';
               }
-            }}
-            onLoadedMetadata={() => {
-              totalViewLoad.current = totalViewLoad.current + 1;
-              console.log('🚀 ~ file: index.tsx:34 ~ SliderVideo ~ totalViewLoad.current:', totalViewLoad.current);
-              if (totalViewLoad.current == 2) {
-                setShowBtn(true);
-              }
             }}>
             <source src={'https://www.w3schools.com/html/movie.mp4'} type="video/mp4" />
             <source src={'https://www.w3schools.com/html/movie.ogg'} type="video/ogg" />
@@ -80,23 +74,31 @@ function SliderVideo({ videos }: { videos: string[] }): JSX.Element {
   );
 }
 
-export function SliderShow(props: Slider): JSX.Element {
+export function SliderShow(props: Slider) {
   const [indexSlide, setIndexSlide] = useState(0);
-  console.log('🚀 ~ file: index.tsx:86 ~ SliderShow ', indexSlide);
+
+  const widthScreen = screen.width;
 
   const slideContainerStyle = {
     transform: `translateX(-${indexSlide * 100}%)`, // Move container by the index times 100%
   };
 
-  const totalSlides = props.slides.length + (props.firstVideo ? 1 : 0);
-
+  let totalSlides = props.slides.length + (props.firstVideo ? 1 : 0);
+  if (widthScreen < widthScreenEnum.maxWidthScreen) totalSlides++;
   return (
     <div className={cx('wrapper', 'relative')}>
       <div className={cx('slide-container')} style={slideContainerStyle}>
         {props.firstVideo && (
-          <div className={cx('slide-item')}>
-            <SliderVideo videos={props.firstVideoLinks} />
-          </div>
+          <>
+            <div className={cx('slide-item', 'max-sm:hidden')}>
+              <SliderVideo videos={props.firstVideoLinks} />
+            </div>
+            {props.firstVideoLinks.map((video, index) => (
+              <div key={index} className={cx('hidden max-sm:block', 'slide-item')}>
+                <SliderVideo videos={[video]} />
+              </div>
+            ))}
+          </>
         )}
         {props.slides.map((slide, index) => (
           <img className={cx('slide-item')} key={index} alt={`Slide ${'ok'}`} src={slide} />

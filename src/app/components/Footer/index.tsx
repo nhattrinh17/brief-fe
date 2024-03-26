@@ -9,9 +9,9 @@ export default function Footer(): JSX.Element {
   return (
     <footer className={cx('footer')}>
       <div className="container margin-left-right">
-        <div className={cx('flex flex-row', 'wrapper')}>
-          <div className={cx('basis-1/4', 'footer__logo-confirm')}>
-            <Image src={'/logo_white.webp'} className={cx('footer__image--logo')} alt="Logo" width={200} height={43} loading="lazy" />
+        <div className={cx('flex flex-row max-sm:flex-col', 'wrapper')}>
+          <div className={cx('basis-1/4 mb-4', 'footer__logo-confirm')}>
+            <Image src={'/logo_white.webp'} className={cx('footer__image--logo', 'max-sm:mb-4')} alt="Logo" width={200} height={43} loading="lazy" />
             <Image src={'/logoSaleNoti.webp'} className={cx('footer__image--confirm')} alt="Bộ công thương xác nhận" width={200} height={75} loading="lazy" />
           </div>
           <div className={cx('flex-1', 'footer-company')}>
@@ -32,7 +32,7 @@ export default function Footer(): JSX.Element {
               </a>
             </p>
           </div>
-          <div className={cx('basis-1/4')}>
+          <div className={cx('basis-1/4 mb-4 max-sm:hidden')}>
             <ul className="text-xs">
               <li className="mb-4">
                 <Link className={cx('underline-text__run', 'relative')} href={'/'}>
@@ -66,7 +66,7 @@ export default function Footer(): JSX.Element {
               </li>
             </ul>
           </div>
-          <div className={cx('basis-1/12', 'footer-network')}>
+          <div className={cx('basis-1/12 mb-4 max-sm:hidden', 'footer-network')}>
             <Link href={'/'}>
               <Image className={cx('footer-network__icon', 'rounded-xl mb-3')} alt="Facebook" src={'/fb_icon_2.webp'} width={40} height={40} />
             </Link>
