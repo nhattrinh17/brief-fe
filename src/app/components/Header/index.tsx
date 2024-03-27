@@ -40,8 +40,8 @@ export function Header(): JSX.Element {
 
   return (
     <>
-      <header className={cx('container', 'header')}>
-        <div className={cx('container flex justify-between max-sm:justify-around')}>
+      <header className={cx('header')}>
+        <div className={cx('container flex justify-between max-sm:justify-around margin-left-right')}>
           <div className="hidden items-center max-sm:flex">
             <FontAwesomeIcon onClick={toggleNavMobile} icon={faBarsStaggered} className={cx('hidden max-sm:flex h-10 text-base header-menu-toggle__icon')} />
           </div>
@@ -49,7 +49,7 @@ export function Header(): JSX.Element {
             <Link href={'/'}>
               <Image alt="Logo" src={'/logo.webp'} width={120} height={60} className={cx('header__logo', 'max-sm:ml-12')} />
             </Link>
-            <div className="max-sm:hidden">
+            <div className="max-sm:hidden ">
               <SearchHeader />
             </div>
           </div>
@@ -83,12 +83,20 @@ export function Header(): JSX.Element {
             </div>
 
             <div className={cx('header-mobile__search', 'hidden max-sm:block')}>
-              <FontAwesomeIcon icon={faMagnifyingGlass} className={cx('header-cart__icon')} onClick={() => setOpenSearchMobile((pre) => !pre)} />
+              <FontAwesomeIcon
+                icon={faMagnifyingGlass}
+                className={cx('header-cart__icon')}
+                onClick={() => {
+                  if (!openSearchMobile) document.documentElement.style.setProperty('--height-header', `140px`);
+                  else document.documentElement.style.setProperty('--height-header', `90px`);
+                  setOpenSearchMobile((pre) => !pre);
+                }}
+              />
             </div>
           </div>
         </div>
         {openSearchMobile && (
-          <div className={cx('header-search__mobile mt-4 hidden max-sm:block')}>
+          <div className={cx('mt-4 hidden max-sm:block', 'header-search__mobile')}>
             <SearchHeader />
           </div>
         )}

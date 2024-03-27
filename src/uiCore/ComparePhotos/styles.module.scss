@@ -1,0 +1,125 @@
+.wrapper-compare {
+  background-color: var(--rgba-primary-1-blur);
+  padding: 60px 0 300px;
+  position: relative;
+  margin-bottom: 50%;
+}
+
+.sub-title {
+  position: relative;
+  margin-left: 15px;
+
+  &::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 10px 10px;
+    border-color: transparent transparent #1f64ff transparent;
+    position: absolute;
+    left: -16px;
+    top: 4px;
+    border-bottom-color: white;
+  }
+}
+
+.content-left,
+.content-right {
+  flex-basis: 50%;
+}
+
+.wrapper-image {
+  position: absolute;
+  top: 40%;
+  left: 20px;
+  right: 20px;
+  padding-bottom: 50%;
+  background-color: white;
+  border-style: solid;
+  border-width: 12px 12px 12px 12px;
+  border-color: #ffffff;
+  border-radius: 7px 7px 7px 7px;
+  box-shadow: 0px 10px 50px 0px rgba(0, 0, 0, 0.07);
+}
+
+.wrapper-image__ranger {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  appearance: none;
+  outline: none;
+  cursor: ew-resize;
+  z-index: 1;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0; /* Đặt chiều rộng của chấm bằng 0 */
+    height: 0; /* Đặt chiều cao của chấm bằng 0 */
+    border: none; /* Xóa viền của chấm */
+    background: transparent; /* Đặt màu nền của chấm là trong suốt */
+  }
+}
+
+.image-comparison-slider {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: white;
+  z-index: 1;
+}
+
+.image-comparison-slider__icons {
+  position: absolute;
+  display: flex;
+  background-color: #1d2327;
+  padding: 12px;
+  left: -18px;
+}
+
+.image-comparison-slider__icon {
+  color: white;
+}
+
+.image-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.image-before,
+.image-after {
+  height: auto;
+  background-size: cover;
+  position: relative;
+
+  & span {
+    position: absolute;
+    color: white;
+    bottom: 20px;
+    padding: 8px 40px;
+    background-color: var(--rgba-primary-1-blur);
+  }
+}
+
+.image-before {
+  & span {
+    left: 20px;
+  }
+}
+
+.image-after {
+  & span {
+    right: 20px;
+  }
+}

@@ -1,0 +1,130 @@
+.wrapper-usp {
+  margin: 40px auto 20px;
+}
+
+.sub-title {
+  position: relative;
+  color: var(--rgba-primary-1-blur);
+  padding-left: 10px;
+
+  &::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 10px 10px;
+    border-color: transparent transparent #1f64ff transparent;
+    position: absolute;
+    left: -8px;
+    top: 6px;
+    border-bottom-color: var(--rgba-primary-1-blur);
+  }
+}
+
+.desc-title {
+  margin: 0 auto;
+  max-width: 70%;
+}
+
+.usp-list {
+  margin: 40px 0 40px;
+  padding: 0 1rem;
+}
+
+.usp-item {
+  .usp-item__image-container {
+    width: 100%;
+    height: auto;
+    display: inline-block; /* change the default display type to inline-block */
+    overflow: hidden;
+  }
+
+  .usp-item__image {
+    width: 100% !important;
+    height: auto;
+    object-fit: contain;
+    display: inline-block; /* change the default display type to inline-block */
+    overflow: hidden;
+    transition: all 0.5s ease;
+    vertical-align: middle;
+  }
+
+  .usp-item__wrapper {
+    padding: 28px 35px;
+    margin: 0 20px;
+    margin-top: -60px;
+    position: relative;
+    z-index: 1;
+    background: #ffffff;
+    border-radius: 7px;
+    box-shadow: 0 5px 25px rgb(0 0 0 / 7%);
+    transition: all 0.25s ease-in-out 0s;
+    max-height: 200px;
+    overflow: hidden;
+  }
+
+  .usp-item__body {
+    transition: all 0.5s ease;
+  }
+
+  &:hover .usp-item__image {
+    transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -o-transform: scale(1.1);
+  }
+
+  &:hover .usp-item__body {
+    transform: translateY(-28%);
+  }
+
+  &:hover .usp-item__body--link {
+    opacity: 1;
+    animation: fakeIn 0.5s ease;
+  }
+
+  &:hover .usp-item__body--icon {
+    opacity: 0;
+    animation: fakeOut 0.5s ease;
+  }
+
+  .usp-item__body--icon {
+    color: var(--rgba-primary-1-blur);
+    margin-bottom: 20px;
+  }
+
+  .usp-item__body--title {
+    display: block;
+    color: #222733;
+    margin: 10px 0;
+  }
+
+  .usp-item__body--desc {
+    color: #858585;
+  }
+
+  .usp-item__body--link {
+    opacity: 0;
+    color: var(--rgba-primary-1-blur);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+}
+
+@keyframes fakeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fakeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

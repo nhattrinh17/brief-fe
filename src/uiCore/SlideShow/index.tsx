@@ -14,7 +14,7 @@ interface Slider {
 
 const cx = classNames.bind(styles);
 
-function SliderVideo({ videos }: { videos: string[] }): JSX.Element {
+function SliderVideo({ videos, handlePlayVideo }: { videos: string[]; handlePlayVideo: () => void }): JSX.Element {
   const [showBtn, setShowBtn] = useState(false);
   const totalViewLoad = useRef(0);
 
@@ -26,7 +26,6 @@ function SliderVideo({ videos }: { videos: string[] }): JSX.Element {
         if (totalViewLoad.current == 2) {
           setShowBtn(true);
         }
-        // video.addEventListener('loadeddata', resolve, { once: true });
       });
     });
 
@@ -49,9 +48,7 @@ function SliderVideo({ videos }: { videos: string[] }): JSX.Element {
                 playBtn.style.display = 'block';
               }
             }}>
-            <source src={'https://www.w3schools.com/html/movie.mp4'} type="video/mp4" />
-            <source src={'https://www.w3schools.com/html/movie.ogg'} type="video/ogg" />
-            {/* <track src="/path/to/captions.vtt" kind="subtitles" srcLang="en" label="English" /> */}
+            <source src={video} type="video/mp4" />
           </video>
           {showBtn && (
             <a
@@ -64,6 +61,7 @@ function SliderVideo({ videos }: { videos: string[] }): JSX.Element {
                 const target = e.target as HTMLElement; // Ép kiểu e.target sang HTMLElement
                 if (video && target) {
                   video.play();
+                  handlePlayVideo();
                   target.style.display = 'none';
                 }
               }}></a>
@@ -76,12 +74,33 @@ function SliderVideo({ videos }: { videos: string[] }): JSX.Element {
 
 export function SliderShow(props: Slider) {
   const [indexSlide, setIndexSlide] = useState(0);
+  // const [playVideo, setPlayVideo] = useState(false);
+  const playVideo = useRef(false);
 
   const widthScreen = screen.width;
-
   const slideContainerStyle = {
     transform: `translateX(-${indexSlide * 100}%)`, // Move container by the index times 100%
   };
+
+  const nextSlide = () => {
+    if (playVideo.current) playVideo.current = false;
+    setIndexSlide((prevIndex) => (prevIndex == totalSlides - 1 ? 0 : prevIndex + 1));
+  };
+
+  const preSlide = () => {
+    if (playVideo.current) playVideo.current = false;
+    setIndexSlide((prevIndex) => (prevIndex == 0 ? totalSlides - 1 : prevIndex - 1));
+  };
+
+  useEffect(() => {
+    const autoNextSlide = setInterval(() => {
+      if (!playVideo.current) nextSlide();
+    }, 3000);
+
+    return () => {
+      clearInterval(autoNextSlide);
+    };
+  }, [indexSlide]);
 
   let totalSlides = props.slides.length + (props.firstVideo ? 1 : 0);
   if (widthScreen < widthScreenEnum.maxWidthScreen) totalSlides++;
@@ -91,11 +110,11 @@ export function SliderShow(props: Slider) {
         {props.firstVideo && (
           <>
             <div className={cx('slide-item', 'max-sm:hidden')}>
-              <SliderVideo videos={props.firstVideoLinks} />
+              <SliderVideo videos={props.firstVideoLinks} handlePlayVideo={() => (playVideo.current = true)} />
             </div>
             {props.firstVideoLinks.map((video, index) => (
               <div key={index} className={cx('hidden max-sm:block', 'slide-item')}>
-                <SliderVideo videos={[video]} />
+                <SliderVideo videos={[video]} handlePlayVideo={() => (playVideo.current = true)} />
               </div>
             ))}
           </>
@@ -104,20 +123,8 @@ export function SliderShow(props: Slider) {
           <img className={cx('slide-item')} key={index} alt={`Slide ${'ok'}`} src={slide} />
         ))}
       </div>
-      <FontAwesomeIcon
-        icon={faArrowLeft}
-        className={cx('slide-btn__left')}
-        onClick={() => {
-          setIndexSlide((prevIndex) => (prevIndex == 0 ? totalSlides - 1 : prevIndex - 1)); // If at the beginning, go to the end
-        }}
-      />
-      <FontAwesomeIcon
-        icon={faArrowRight}
-        className={cx('slide-btn__right')}
-        onClick={() => {
-          setIndexSlide((prevIndex) => (prevIndex == totalSlides - 1 ? 0 : prevIndex + 1)); // If at the end, go to the beginning
-        }}
-      />
+      <FontAwesomeIcon icon={faArrowLeft} className={cx('slide-btn__left')} onClick={preSlide} />
+      <FontAwesomeIcon icon={faArrowRight} className={cx('slide-btn__right')} onClick={nextSlide} />
     </div>
   );
 }
