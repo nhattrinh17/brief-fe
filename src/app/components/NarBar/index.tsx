@@ -8,6 +8,7 @@ const cx = classNames.bind(styles);
 export default function NarBar(): JSX.Element {
   return (
     <nav className={cx('max-sm:wrapper-navbar__mobile', 'wrapper')}>
+      {/* <nav className={cx('wrapper max-sm:h-full')}> */}
       <div className={cx('hidden', 'max-sm:navbar-logo max-sm:rounded-3xl')}>
         <Link href={'/'}>
           <Image alt="logo" src={'/logo_white.webp'} width={100} height={100} />

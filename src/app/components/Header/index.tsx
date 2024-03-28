@@ -43,7 +43,7 @@ export function Header(): JSX.Element {
       <header className={cx('header')}>
         <div className={cx('container flex justify-between max-sm:justify-around margin-left-right')}>
           <div className="hidden items-center max-sm:flex">
-            <FontAwesomeIcon onClick={toggleNavMobile} icon={faBarsStaggered} className={cx('hidden max-sm:flex h-10 text-base header-menu-toggle__icon')} />
+            <FontAwesomeIcon onClick={toggleNavMobile} icon={faBarsStaggered} className={cx('hidden max-sm:flex h-5', 'header-menu-toggle__icon')} />
           </div>
           <div className={cx('header-left', 'flex max-sm:justify-center justify-between')}>
             <Link href={'/'}>

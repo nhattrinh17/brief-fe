@@ -76,8 +76,15 @@ export function SliderShow(props: Slider) {
   const [indexSlide, setIndexSlide] = useState(0);
   // const [playVideo, setPlayVideo] = useState(false);
   const playVideo = useRef(false);
+  // const totalSlides =useRef()
+  let totalSlides = props.slides.length + (props.firstVideo ? 1 : 0);
 
-  const widthScreen = screen.width;
+  if (typeof window !== 'undefined') {
+    // Client-side-only code
+    const widthScreen = screen.width;
+    if (widthScreen < widthScreenEnum.maxWidthScreen) totalSlides++;
+  }
+
   const slideContainerStyle = {
     transform: `translateX(-${indexSlide * 100}%)`, // Move container by the index times 100%
   };
@@ -102,8 +109,6 @@ export function SliderShow(props: Slider) {
     };
   }, [indexSlide]);
 
-  let totalSlides = props.slides.length + (props.firstVideo ? 1 : 0);
-  if (widthScreen < widthScreenEnum.maxWidthScreen) totalSlides++;
   return (
     <div className={cx('wrapper', 'relative')}>
       <div className={cx('slide-container')} style={slideContainerStyle}>
