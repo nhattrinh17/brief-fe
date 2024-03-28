@@ -61,7 +61,7 @@
 .wrapper-navbar {
   position: sticky;
   top: var(--height-header);
-  z-index: 10;
+  z-index: 2;
 }
 
 @media not all and (min-width: 640px) {
